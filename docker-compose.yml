@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  sish:
+    image: antoniomika/sish:latest
+    container_name: sish
+    restart: unless-stopped
+    ports:
+      - "18081:80"
+      - "2222:2222"
+    volumes:
+      - ./data/keys:/keys
+      - ${PUBKEYS_DIR:-./data/pubkeys}:/pubkeys
+      - ./data/certs:/certs
+    command: |
+      --ssh-address=:2222
+      --http-address=:80
+      --https=false
+      --redirect-root-location=https://github.com
+      --domain=${TUNNEL_DOMAIN:-tunnel.example.com}
+      --authentication=true
+      --authentication-keys-directory=/pubkeys
+      --private-keys-directory=/keys
+      --bind-random-ports=false
+      --bind-random-subdomains=false
+      --force-requested-subdomains=true
+      --verify-ssl=false
+      --cleanup-unbound=true
+      --idle-connection=true
+      --ping-client=true
+      --ping-client-interval=5s
+      --ping-client-timeout=15s
+      --log-to-client=true
+      --admin-console=true
+      --admin-console-token=${ADMIN_TOKEN:-changeme}
+      --service-console=true
+      --service-console-token=${ADMIN_TOKEN:-changeme}
+    environment:
+      - TZ=Asia/Taipei
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

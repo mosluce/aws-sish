@@ -1,0 +1,4 @@
+# pubkeys directory
+# Place authorized user SSH public keys here.
+# Each file should contain one public key and be named after the user.
+# Example: pubkeys/alice.pub
