@@ -91,7 +91,8 @@ cmd_list() {
     echo "Authorized tunnel users:"
     echo "========================"
     local count=0
-    for f in "${PUBKEYS_DIR}"/*.pub 2>/dev/null; do
+    for f in "${PUBKEYS_DIR}"/*.pub; do
+        [ -f "$f" ] || continue
         if [ -f "$f" ]; then
             local name
             name=$(basename "$f" .pub)
