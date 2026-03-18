@@ -14,6 +14,7 @@ if [ -f "$PROJECT_DIR/.env" ]; then
 fi
 
 PUBKEYS_DIR="${PUBKEYS_DIR:-./data/pubkeys}"
+TUNNEL_DOMAIN="${TUNNEL_DOMAIN:-tunnel.example.com}"
 mkdir -p "$PUBKEYS_DIR"
 
 usage() {
@@ -53,7 +54,7 @@ cmd_add() {
     echo "Key: $(head -c 60 "${PUBKEYS_DIR}/${username}.pub")..."
     echo ""
     echo "User can now connect with:"
-    echo "  ssh -R <subdomain>:80:localhost:<port> tunnel.example.com -p 2222"
+    echo "  ssh -R <subdomain>:80:localhost:<port> ${TUNNEL_DOMAIN} -p 2222"
 }
 
 cmd_add_key() {
@@ -70,7 +71,7 @@ cmd_add_key() {
     echo "Added user: $username"
     echo ""
     echo "User can now connect with:"
-    echo "  ssh -R <subdomain>:80:localhost:<port> tunnel.example.com -p 2222"
+    echo "  ssh -R <subdomain>:80:localhost:<port> ${TUNNEL_DOMAIN} -p 2222"
 }
 
 cmd_remove() {
