@@ -64,7 +64,7 @@ else
 fi
 
 echo "=== [5/5] Setting up project ==="
-APP_DIR="/opt/aws-tunnel"
+APP_DIR="/opt/aws-sish"
 if [ ! -d "$APP_DIR" ]; then
     sudo mkdir -p "$APP_DIR"
     sudo chown "$USER:$USER" "$APP_DIR"

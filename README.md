@@ -1,4 +1,4 @@
-# aws-tunnel
+# aws-sish
 
 Self-hosted tunnel server using [sish](https://github.com/antoniomika/sish) on AWS EC2. Allows multiple users to expose local services via auto-assigned subdomains (e.g., `myapp.tunnel.example.com`), similar to ngrok/cloudflared but fully self-hosted.
 
@@ -36,7 +36,7 @@ Self-hosted tunnel server using [sish](https://github.com/antoniomika/sish) on A
 Launch an EC2 instance (Amazon Linux 2023 or Ubuntu 22.04) with the following **Security Group** inbound rules:
 
 | Port | Protocol | Source    | Purpose              |
-|------|----------|-----------|----------------------|
+| ---- | -------- | --------- | -------------------- |
 | 22   | TCP      | Your IP   | SSH admin access     |
 | 80   | TCP      | 0.0.0.0/0 | HTTP tunnel traffic  |
 | 443  | TCP      | 0.0.0.0/0 | HTTPS tunnel traffic |
@@ -71,6 +71,7 @@ AWS_HOSTED_ZONE_ID=Z0123456789ABCDEFGHIJ
 ```
 
 This creates Route 53 records:
+
 - `tunnel.yourdomain.com` → EC2 public IP
 - `*.tunnel.yourdomain.com` → EC2 public IP
 
@@ -137,6 +138,7 @@ docker compose logs -f sish
 ### Admin console
 
 sish provides a web admin console at:
+
 - `https://tunnel.yourdomain.com/_sish/console`
 - Authenticate with the `ADMIN_TOKEN` from `.env`
 
@@ -167,7 +169,7 @@ Changes take effect immediately -- sish watches the pubkeys directory. No restar
 ## File Structure
 
 ```
-aws-tunnel/
+aws-sish/
 ├── docker-compose.yml       # sish service definition
 ├── .env.example             # Environment template
 ├── .gitignore
